@@ -104,11 +104,23 @@
             align-items: center;
             margin: 0;
         }
+
+        #badge {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            border-top-left-radius: 7px;
+            font-size: 0.7em;
+            padding: 0.2em 0.5em;
+            background-color: #1abc9c;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
     <h1 style="font-size: 7rem; margin: 0; margin-bottom: 1rem;" id="title">Fredagsbar om:</h1>
     <p style="margin: 0; font-size: 9rem;" id="countdown"></p>
+    <div id="badge">Made by ChatGPT</div>
 <script>
     function getNextFriday() {
         // get current date and time
