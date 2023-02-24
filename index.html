@@ -107,55 +107,62 @@
     </style>
 </head>
 <body>
-    <h1 style="font-size: 7rem; margin: 0; margin-bottom: 1rem;" id="title"></h1>
-    <p style="margin: 0;" id="countdown"></p>
+    <h1 style="font-size: 7rem; margin: 0; margin-bottom: 1rem;" id="title">Fredagsbar om:</h1>
+    <p style="margin: 0; font-size: 9rem;" id="countdown"></p>
 <script>
-    function updateCountdown() {
-        // Get current date and time
+    function getNextFriday() {
+        // get current date and time
         var now = new Date();
-        var day = now.getDate();
-        var month = now.getMonth() + 1; // Months are zero-indexed, so add 1
-        var year = now.getFullYear();
-        var hours = now.getHours();
-        var minutes = now.getMinutes();
-        var seconds = now.getSeconds();
-
-        // Calculate next Friday
-        var friday = new Date(year, month - 1, 20, 15); // Set to first Friday after 20th at 2pm
-        while (friday.getDay() !== 5) { // Loop until we find a Friday
-            friday.setDate(friday.getDate() + 1);
+        // set date to the 20th of the month
+        var friday = new Date(now.getFullYear(), now.getMonth(), 20);
+        // if the 20th is after today, set date to the next month's 20th
+        if (friday > now) {
+            friday.setMonth(friday.getMonth() + 1);
         }
-        if (hours >= 14 && day === friday.getDate()) {
-            friday.setDate(friday.getDate() + 7); // If it's already past 2pm on Friday, skip to next week
-        }
-
-        // Calculate time until next Friday
-        var timeLeft = friday.getTime() - now.getTime();
-        if (timeLeft <= 0) {
-            // If it's already Friday after 2pm, set timeLeft to 0 and skip to next Friday
-            timeLeft = 0;
-            friday.setDate(friday.getDate() + 7);
-        }
-
-        // Update countdown display
-        var daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        var hoursLeft = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
-        var minutesLeft = Math.floor((timeLeft / (1000 * 60)) % 60);
-        var secondsLeft = Math.floor((timeLeft / 1000) % 60);
-        var countdownString = daysLeft + "d " + hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s";
-        document.getElementById("countdown").innerHTML = countdownString;
-
-        // Update title
-        if (timeLeft <= 0) {
-            document.getElementById("title").innerHTML = "Fredagsbar nå!";
-        } else {
-            document.getElementById("title").innerHTML = "Fredagsbar om:";
-        }
-
-        // Update countdown every second
-        setTimeout(updateCountdown, 1000);
+        // set day to the next Friday
+        friday.setDate(friday.getDate() + (5 - friday.getDay()));
+        // set time to 3pm
+        friday.setHours(15, 0, 0, 0);
+        return friday;
     }
 
-    // Start countdown
-    updateCountdown();
+    function updateCountdown() {
+        // get current time and next Friday
+        var now = new Date();
+        var friday = getNextFriday();
+        // calculate number of days, hours, minutes, seconds until Friday
+        var diff = Math.max(0, friday - now) / 1000;
+        var days = Math.floor(diff / 86400);
+        diff -= days * 86400;
+        var hours = Math.floor(diff / 3600) % 24;
+        diff -= hours * 3600;
+        var minutes = Math.floor(diff / 60) % 60;
+        diff -= minutes * 60;
+        var seconds = Math.floor(diff) % 60;
+        // update countdown text
+        var countdownText = "";
+        if (days > 0) {
+            countdownText += days + "d ";
+        }
+        if (days > 0 || hours > 0) {
+            countdownText += hours + "h ";
+        }
+        if (days > 0 || hours > 0 || minutes > 0) {
+            countdownText += minutes + "m ";
+        }
+        if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+            countdownText = "0s";
+        } else if (countdownText === "") {
+            countdownText = "0m";
+        } else {
+            countdownText += seconds + "s";
+        }
+        document.getElementById("countdown").innerHTML = countdownText;
+        // update title text when countdown reaches zero
+        if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+            document.getElementById("title").innerHTML = "Fredagsbar nå!";
+        }
+    }
+
+    setInterval(updateCountdown, 1000); // update countdown every second
 </script>
