@@ -1,148 +1,155 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Fredagsbar om:</title>
     <style>
-        body {
-            color: #FFFFFF;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            font-size: 48px;
-            margin-top: 50px;
-            background-color: #1abc9c;
-            animation: color-change 30s infinite;
+      body {
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        font-size: 48px;
+        margin-top: 50px;
+        background-color: #1abc9c;
+        animation: color-change 30s infinite;
+      }
+      h1 {
+        font-size: 72px;
+        margin-bottom: 50px;
+      }
+      #countdown {
+        font-size: 96px;
+        margin-bottom: 100px;
+        opacity: 1;
+        animation: blink 1s ease-in-out infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0.5;
         }
-        h1 {
-            font-size: 72px;
-            margin-bottom: 50px;
+      }
+      @keyframes color-change {
+        0% {
+          background-color: #1abc9c;
         }
-        #countdown {
-            font-size: 96px;
-            margin-bottom: 100px;
-            opacity: 1;
-            animation: blink 1s ease-in-out infinite;
+        5% {
+          background-color: #2ecc71;
         }
-        @keyframes blink {
-            50% {
-                opacity: 0.5;
-            }
+        10% {
+          background-color: #3498db;
         }
-        @keyframes color-change {
-            0% {
-                background-color: #1abc9c;
-            }
-            5% {
-                background-color: #2ecc71;
-            }
-            10% {
-                background-color: #3498db;
-            }
-            15% {
-                background-color: #9b59b6;
-            }
-            20% {
-                background-color: #34495e;
-            }
-            25% {
-                background-color: #16a085;
-            }
-            30% {
-                background-color: #27ae60;
-            }
-            35% {
-                background-color: #2980b9;
-            }
-            40% {
-                background-color: #8e44ad;
-            }
-            45% {
-                background-color: #2c3e50;
-            }
-            50% {
-                background-color: #f1c40f;
-            }
-            55% {
-                background-color: #e67e22;
-            }
-            60% {
-                background-color: #e74c3c;
-            }
-            65% {
-                background-color: #d35400;
-            }
-            70% {
-                background-color: #c0392b;
-            }
-            75% {
-                background-color: #f39c12;
-            }
-            80% {
-                background-color: #ff00ff;
-            }
-            85% {
-                background-color: #00ff00;
-            }
-            90% {
-                background-color: #0000ff;
-            }
-            95% {
-                background-color: #ff0000;
-            }
-            100% {
-                background-color: #1abc9c;
-            }
+        15% {
+          background-color: #9b59b6;
         }
+        20% {
+          background-color: #34495e;
+        }
+        25% {
+          background-color: #16a085;
+        }
+        30% {
+          background-color: #27ae60;
+        }
+        35% {
+          background-color: #2980b9;
+        }
+        40% {
+          background-color: #8e44ad;
+        }
+        45% {
+          background-color: #2c3e50;
+        }
+        50% {
+          background-color: #f1c40f;
+        }
+        55% {
+          background-color: #e67e22;
+        }
+        60% {
+          background-color: #e74c3c;
+        }
+        65% {
+          background-color: #d35400;
+        }
+        70% {
+          background-color: #c0392b;
+        }
+        75% {
+          background-color: #f39c12;
+        }
+        80% {
+          background-color: #ff00ff;
+        }
+        85% {
+          background-color: #00ff00;
+        }
+        90% {
+          background-color: #0000ff;
+        }
+        95% {
+          background-color: #ff0000;
+        }
+        100% {
+          background-color: #1abc9c;
+        }
+      }
 
-        html, body {
-            height: 100%;
-        }
+      html,
+      body {
+        height: 100%;
+      }
 
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-        }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+      }
 
-        #badge {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            border-top-left-radius: 7px;
-            font-size: 0.7em;
-            padding: 0.2em 0.5em;
-            background-color: #1abc9c;
-            color: #fff;
-        }
+      #badge {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        border-top-left-radius: 7px;
+        font-size: 0.7em;
+        padding: 0.2em 0.5em;
+        background-color: #1abc9c;
+        color: #fff;
+      }
     </style>
-</head>
-<body>
-    <h1 style="font-size: 7rem; margin: 0; margin-bottom: 1rem;" id="title">Fredagsbar om:</h1>
-    <p style="margin: 0; font-size: 9rem;" id="countdown"></p>
+  </head>
+  <body>
+    <h1 style="font-size: 7rem; margin: 0; margin-bottom: 1rem" id="title">
+      Fredagsbar om:
+    </h1>
+    <p style="margin: 0; font-size: 9rem" id="countdown"></p>
     <div id="badge">Made by ChatGPT</div>
-<script>
-    function getNextFriday() {
-        // get current date and time
+    <script>
+      function getNextFriday() {
         var now = new Date();
-        // set date to the 20th of the month
         var friday = new Date(now.getFullYear(), now.getMonth(), 20);
-        // if the 20th is after today, set date to the next month's 20th
-        if (friday > now) {
-            friday.setMonth(friday.getMonth() + 1);
+
+        // Find the first Friday after the 20th
+        friday.setDate(friday.getDate() + ((5 - friday.getDay() + 7) % 7));
+
+        // If the Friday has already passed, find the first Friday after the 20th of the next month
+        if (friday <= now) {
+          friday.setMonth(friday.getMonth() + 1);
+          friday.setDate(20);
+          friday.setDate(friday.getDate() + ((5 - friday.getDay() + 7) % 7));
         }
-        // set day to the next Friday
-        friday.setDate(friday.getDate() + (5 - friday.getDay()));
-        // set time to 3pm
+
+        // Set time to 3pm
         friday.setHours(15, 0, 0, 0);
         return friday;
-    }
+      }
 
-    function updateCountdown() {
-        // get current time and next Friday
+      function updateCountdown() {
+        // Get current time and next Friday
         var now = new Date();
         var friday = getNextFriday();
-        // calculate number of days, hours, minutes, seconds until Friday
+
+        // Calculate number of days, hours, minutes, seconds until Friday
         var diff = Math.max(0, friday - now) / 1000;
         var days = Math.floor(diff / 86400);
         diff -= days * 86400;
@@ -151,30 +158,34 @@
         var minutes = Math.floor(diff / 60) % 60;
         diff -= minutes * 60;
         var seconds = Math.floor(diff) % 60;
-        // update countdown text
+
+        // Update countdown text
         var countdownText = "";
         if (days > 0) {
-            countdownText += days + "d ";
+          countdownText += days + "d ";
         }
         if (days > 0 || hours > 0) {
-            countdownText += hours + "h ";
+          countdownText += hours + "h ";
         }
         if (days > 0 || hours > 0 || minutes > 0) {
-            countdownText += minutes + "m ";
+          countdownText += minutes + "m ";
         }
-        if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
-            countdownText = "0s";
+        if (days === 0 && hours === 0 && minutes === 0) {
+          countdownText = seconds + "s";
         } else if (countdownText === "") {
-            countdownText = "0m";
+          countdownText = "0m";
         } else {
-            countdownText += seconds + "s";
+          countdownText += seconds + "s";
         }
         document.getElementById("countdown").innerHTML = countdownText;
-        // update title text when countdown reaches zero
-        if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
-            document.getElementById("title").innerHTML = "Fredagsbar nå!";
-        }
-    }
 
-    setInterval(updateCountdown, 1000); // update countdown every second
-</script>
+        // Update title text when countdown reaches zero
+        if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+          document.getElementById("title").innerHTML = "Fredagsbar nå!";
+        }
+      }
+
+      setInterval(updateCountdown, 1000); // Update countdown every second
+    </script>
+  </body>
+</html>
