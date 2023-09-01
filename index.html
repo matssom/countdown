@@ -126,6 +126,10 @@
     <div id="badge">Made by ChatGPT</div>
     <script>
       function getNextFriday() {
+        if (!!window.customTime) {
+          return window.customTime;
+        }
+
         var now = new Date();
         var friday = new Date(now.getFullYear(), now.getMonth(), 20);
 
