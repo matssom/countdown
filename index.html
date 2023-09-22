@@ -13,11 +13,11 @@
         animation: color-change 30s infinite;
       }
       h1 {
-        font-size: 72px;
+        font-size: 40px;
         margin-bottom: 50px;
       }
       #countdown {
-        font-size: 96px;
+        font-size: 56px;
         margin-bottom: 100px;
         opacity: 1;
         animation: blink 1s ease-in-out infinite;
@@ -119,13 +119,17 @@
     </style>
   </head>
   <body>
-    <h1 style="font-size: 7rem; margin: 0; margin-bottom: 1rem" id="title">
+    <h1 style="font-size: 4rem; margin: 0; margin-bottom: 1rem" id="title">
       Fredagsbar om:
     </h1>
-    <p style="margin: 0; font-size: 9rem" id="countdown"></p>
+    <p style="margin: 0; font-size: 6rem" id="countdown"></p>
     <div id="badge">Made by ChatGPT</div>
     <script>
       function getNextFriday() {
+        var today = new Date();
+        today.setHours(16, 0, 0, 0);
+        return today;
+
         if (!!window.customTime) {
           return window.customTime;
         }
